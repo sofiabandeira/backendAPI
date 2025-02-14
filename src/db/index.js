@@ -1,18 +1,17 @@
 import pkg from "pg";
-const {Pool} = pkg;
+const { Pool } = pkg;
 
-async function connect() { 
-    const pool = new Pool({
-      connectionString: process.env.URL_BD,
-    });
-    return pool.connect();
+async function connect() {
+  const pool = new Pool({
+    connectionString: process.env.URL_DB,
+  });
+  return pool.connect();
 }
 
 async function selectUsuarios() {
-    const client = await connect();
-    const res = await client.query("SELECT * FROM usuario");
-    client.release();
-    return res.rows;
+  const client = await connect();
+  const res = await client.query("SELECT * FROM usuario");
+  return res.rows;
 }
 
 async function selectUsuario(id) {
@@ -47,4 +46,12 @@ async function updateUsuario(id, data) {
   client.release();
 }
 
-export { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario };
+async function autenticarUsuario(email, senha) {
+  const client = await connect();
+  const query = "SELECT * FROM usuario WHERE email = $1 AND senha = $2";
+  const usuario = [email, senha];
+  const res = await client.query(query, usuario);
+  return res.rows[0];
+}
+
+export { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario, autenticarUsuario};
