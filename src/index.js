@@ -2,11 +2,13 @@ import express from "express";
 import dotenv from "dotenv"; 
 import { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario } from "./db/index.js";   
 import roteadorUsuario from "./routes/usuario.js";
+import roteadorLogin from "./routes/login.js";
 dotenv.config();
 
 const app = express();          
 const port = 3000;
 
+app.use(roteadorLogin);
 app.use(express.json());
 app.use(roteadorUsuario);
 app.get("/", (req, res) => {      
