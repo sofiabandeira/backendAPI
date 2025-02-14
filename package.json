@@ -1,7 +1,7 @@
 {
   "name": "webatv13api",
   "version": "1.0.0",
-  "description": "emanuel miranda  eduardo sabino",
+  "description": "emanuel miranda  lindha emanuelly",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +14,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.9",
     "pg": "^8.13.3"
   }
 }
