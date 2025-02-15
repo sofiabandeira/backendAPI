@@ -1,4 +1,6 @@
 import { Router } from "express";
+import jwt from "jsonwebtoken";
+import { autenticarUsuario } from "../db/index.js";
 
 import {
   selectUsuario,
@@ -60,6 +62,21 @@ router.delete("/usuario/:id", async (req, res) => {
   try {
     await deleteUsuario(req.params.id);
     res.status(200).json({ message: "Usuário excluido com sucesso!" });
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message || "Erro!" });
+  }
+});
+
+router.post("/login", async (req, res) => {
+  console.log("Rota POST /login solicitada");
+  try {
+    const usuario = await autenticarUsuario(req.body.email, req.body.senha);
+    if (usuario !== undefined) {
+      const token = jwt.sign({ user: usuario.id, acesso: usuario.acesso }, process.env.SECRET, {
+        expiresIn: 30000,
+      });
+      res.status(202).json({ token: token });
+    } else res.status(404).json({ message: "Usuário/Senha incorreta!" });
   } catch (error) {
     res.status(error.status || 500).json({ message: error.message || "Erro!" });
   }
