@@ -10,7 +10,7 @@ import {
 
 const router = Router();
 
-router.get("/usuario", async (req, res) => {
+router.get("/usuarios", async (req, res) => {
   console.log("Rota GET /usuario solicitada");
   try {
     const usuarios = await selectUsuarios();
