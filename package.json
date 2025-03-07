@@ -1,7 +1,7 @@
 {
-  "name": "webatv13api",
+  "name": "backendAPI",
   "version": "1.0.0",
-  "description": "emanuel miranda  lindha emanuelly",
+  "description": "sofia bandeira",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
